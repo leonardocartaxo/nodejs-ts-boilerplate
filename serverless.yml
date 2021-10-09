@@ -1,0 +1,43 @@
+app: nodejs-ts-boilerplate
+service: nodejs-ts-boilerplate
+useDotenv: true
+
+provider:
+  name: aws
+  stage: dev
+  runtime: nodejs14.x
+  region: us-east-1
+  lambdaHashingVersion: 20201221
+  environment:
+    NODE_ENV: ${env:NODE_ENV}
+
+plugins:
+  - serverless-plugin-typescript 
+  - serverless-offline
+  - serverless-dotenv-plugin
+
+custom:
+  serverless-offline:
+    httpPort: ${env:APP_PORT}
+    lambdaPort: ${env:LAMBDA_PORT}
+    noPrependStageInUrl: true
+
+functions:
+  createUser:
+    handler: src/main/aws/handlers/usersHandler.create
+    events:
+      - http:
+          path: users
+          method: post
+  getUser:
+    handler: src/main/aws/handlers/usersHandler.get
+    events:
+      - http:
+          path: users/{id}
+          method: get
+  getAllUser:
+    handler: src/main/aws/handlers/usersHandler.getAll
+    events:
+      - http:
+          path: users
+          method: get
