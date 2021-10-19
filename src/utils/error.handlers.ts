@@ -4,21 +4,26 @@ import { StatusCodes } from 'http-status-codes';
 export const handleControllerError = (error: any): ApiResponse => {
   console.error(`controller error: ${error}`);
 
+  return handleError(error);
+};
+
+export const handleRouterError = (error: any): ApiResponse => {
+  console.error(`handler error: ${error instanceof Object ? JSON.stringify(error) : error }`);
+
+  return handleError(error);
+};
+
+const handleError = (error: any): ApiResponse => {
   if (error instanceof ApiResponse) {
     return error;
   }
 
-  return {
-    statusCode: StatusCodes.INTERNAL_SERVER_ERROR,
-    body: error?.message ?? error,
-  };
-};
+  if (error?.response?.status) {
+    const apiResponse = new ApiResponse();
+    apiResponse.statusCode = error?.response?.status;
+    apiResponse.body = error?.response?.data;
 
-export const handleRouterError = (error: any): ApiResponse => {
-  console.error(`handler error: ${error}`);
-
-  if (error instanceof ApiResponse) {
-    return error;
+    return apiResponse;
   }
 
   return {
