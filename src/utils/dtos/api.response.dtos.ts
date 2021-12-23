@@ -6,5 +6,5 @@ export class ApiResponseBody {
 
 export class ApiResponse {
   statusCode: number;
-  body: string;
+  body: any;
 }

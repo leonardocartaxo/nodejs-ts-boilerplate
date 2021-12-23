@@ -1,19 +1,23 @@
 import { ApiResponse } from './dtos/api.response.dtos';
 import { StatusCodes } from 'http-status-codes';
 
-export const handleControllerError = (error: any): ApiResponse => {
-  console.error(`controller error: ${error}`);
-
-  return handleError(error);
+export const handleControllerError = (error: any, request?: any): ApiResponse => {
+  return handleError(error, 'controller', request);
 };
 
-export const handleRouterError = (error: any): ApiResponse => {
-  console.error(`handler error: ${error instanceof Object ? JSON.stringify(error) : error }`);
-
-  return handleError(error);
+export const handleRouterError = (error: any, request?: any): ApiResponse => {
+  return handleError(error, 'router', request);
 };
 
-const handleError = (error: any): ApiResponse => {
+const handleError = (error: any, context?: string, request?: any): ApiResponse => {
+  const errorLog: ErrorLog = {
+    date: new Date(),
+    request,
+    error,
+    context,
+  };
+  console.error(`${JSON.stringify(errorLog)}`);
+
   if (error instanceof ApiResponse) {
     return error;
   }
@@ -31,3 +35,10 @@ const handleError = (error: any): ApiResponse => {
     body: error?.message ?? error,
   };
 };
+
+class ErrorLog {
+  context?: string;
+  date?: Date;
+  request?: any;
+  error?: any;
+}

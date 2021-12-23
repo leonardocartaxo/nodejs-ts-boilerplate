@@ -1,5 +1,5 @@
 export class ApiRequest {
-  params?: object;
+  params?: any;
   query?: any;
   body?: any;
   headers?: any;

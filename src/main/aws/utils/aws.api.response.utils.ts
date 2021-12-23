@@ -31,6 +31,17 @@ class AwsApiResult {
       },                   null, 4),
     };
   }
+
+  toPdfResponse() {
+    return {
+      statusCode: this.statusCode,
+      headers: {
+        'Content-type': 'application/pdf',
+      },
+      body: this.body,
+      isBase64Encoded: true,
+    };
+  }
 }
 
 export class AwsApiResponseUtils {
@@ -38,6 +49,12 @@ export class AwsApiResponseUtils {
     const body = (data instanceof ApiResponse) ? data.body : data;
 
     return new AwsApiResult(body).toOkResponse();
+  }
+
+  static sendPdf(data: Buffer): ApiResponse {
+    const body = (data instanceof ApiResponse) ? data.body : data;
+
+    return new AwsApiResult(body).toPdfResponse();
   }
 
   static error(
