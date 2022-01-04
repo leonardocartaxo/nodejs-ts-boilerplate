@@ -1,6 +1,6 @@
-import {BaseEntityKeys} from "../../../utils/base/entities/base-entity";
-import {IsString} from "class-validator";
-import {User} from "../entities/user.entity";
+import { BaseEntityKeys } from '../../../utils/base/entities/base-entity';
+import { IsString } from 'class-validator';
+import { User } from '../entities/user.entity';
 
 export class UserCreateDto implements Omit<User, BaseEntityKeys> {
   @IsString()
@@ -30,5 +30,5 @@ export class UserGetParamsDto {
 export const toUserDto = (entity: User): UserDto => {
   return {
     ...entity
-  }
-}
+  };
+};

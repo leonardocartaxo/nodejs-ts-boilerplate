@@ -1,14 +1,14 @@
 import { RequestValidator } from '../../utils/request.validator';
 import { ApiRequest } from '../../utils/dtos/api.request.dtos';
 import { handleRouterError } from '../../utils/error.handlers';
-import {ApiResponse} from "../../utils/dtos/api.response.dtos";
-import {Connection} from "mongoose";
-import {UsersRepository} from "./repositories/users.repository";
-import {UsersService} from "./services/users.service";
-import {UsersController} from "./controllers/rest/users.controller";
-import {UserGetParamsDto, UserDto, UserCreateDto} from "./dtos/user.dto";
-import {Pagination} from "../../utils/helpers/pagination";
-import {DBManager} from "../../utils/helpers/db-manager";
+import { ApiResponse } from '../../utils/dtos/api.response.dtos';
+import { Connection } from 'mongoose';
+import { UsersRepository } from './repositories/users.repository';
+import { UsersService } from './services/users.service';
+import { UsersController } from './controllers/rest/users.controller';
+import { UserGetParamsDto, UserDto, UserCreateDto } from './dtos/user.dto';
+import { Pagination } from '../../utils/helpers/pagination';
+import { DBManager } from '../../utils/helpers/db-manager';
 
 let usersRepository!: UsersRepository;
 let usersService!: UsersService;

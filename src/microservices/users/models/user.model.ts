@@ -1,10 +1,10 @@
 import { prop } from '@typegoose/typegoose';
 import { ObjectId } from 'mongodb';
-import {User} from "../entities/user.entity";
+import { User } from '../entities/user.entity';
 
 export class UserModel implements Omit<User, 'id'> {
   @prop()
-  _id: ObjectId
+  _id: ObjectId;
   @prop()
   createdAt: Date;
 
@@ -23,7 +23,7 @@ export class UserModel implements Omit<User, 'id'> {
   @prop()
   address: string;
 
-  public get id(): string {
+  public get id (): string {
     return this._id.toHexString();
   }
 }

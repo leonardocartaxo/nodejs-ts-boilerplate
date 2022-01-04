@@ -1,21 +1,22 @@
-    
 {
-  "extends": ["tslint-config-airbnb"],
-  "indent": [
-    true,
-    "tabs",
-    4
-  ],
-  "rules": {
-    "max-line-length":{
-      "options": {
-        "limit": 120
-      }
-    }
-  },
-  "linterOptions": {
-    "exclude": [
+	"extends": ["tslint-config-standard"],
+	"indent": [
+		true,
+		"tabs",
+		2
+	],
+	"rules": {
+		"semicolon": true,
+		"object-literal-shorthand": true,
+		"max-line-length":{
+			"options": {
+				"limit": 120
+			}
+		}
+	},
+	"linterOptions": {
+		"exclude": [
 
-    ]
-  }
+		]
+	}
 }

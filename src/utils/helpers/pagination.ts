@@ -15,8 +15,8 @@ export class PaginationOptions {
 export class Pagination<Entity> {
   currentPage: number;
   itemsPerPage: number;
-  currentPageItensCount: number;
+  currentPageItemsCount: number;
   totalPages: number;
-  totalItens: number;
+  totalItems: number;
   items: Entity[];
 }

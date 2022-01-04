@@ -1,5 +1,5 @@
-import {Connection, createConnection} from "mongoose";
-import {MongoMemoryServer} from "mongodb-memory-server";
+import { Connection, createConnection } from 'mongoose';
+import { MongoMemoryServer } from 'mongodb-memory-server';
 
 let mongoConnection: Connection;
 let mongoInmemory: MongoMemoryServer;
@@ -14,4 +14,4 @@ export const getMongoInMemoryConnection = async (): Promise<Connection> => {
   }
 
   return mongoConnection;
-}
+};

@@ -11,10 +11,10 @@ export const handleRouterError = (error: any, request?: any): ApiResponse => {
 
 const handleError = (error: any, context?: string, request?: any): ApiResponse => {
   const errorLog: ErrorLog = {
-    date: new Date(),
     request,
     error,
     context,
+    date: new Date()
   };
   console.error(`${JSON.stringify(errorLog)}`);
 
@@ -32,7 +32,7 @@ const handleError = (error: any, context?: string, request?: any): ApiResponse =
 
   return {
     statusCode: StatusCodes.INTERNAL_SERVER_ERROR,
-    body: error?.message ?? error,
+    body: error?.message ?? error
   };
 };
 
