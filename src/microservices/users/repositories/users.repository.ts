@@ -5,6 +5,6 @@ import { UserModel } from '../models/user.model';
 
 export class UsersRepository extends MongoBaseRepository<User> {
   constructor (private connectionModel: Connection) {
-    super(connectionModel, UserModel);
+    super(connectionModel, UserModel, 'users');
   }
 }

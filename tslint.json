@@ -6,6 +6,7 @@
 		2
 	],
 	"rules": {
+		"indent": true,
 		"semicolon": true,
 		"object-literal-shorthand": true,
 		"max-line-length":{

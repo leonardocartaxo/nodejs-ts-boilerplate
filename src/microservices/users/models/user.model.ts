@@ -2,9 +2,9 @@ import { prop } from '@typegoose/typegoose';
 import { ObjectId } from 'mongodb';
 import { User } from '../entities/user.entity';
 
-export class UserModel implements Omit<User, 'id'> {
-  @prop()
-  _id: ObjectId;
+export class UserModel implements Omit<User, '_id'> {
+  // @prop({ required: false })
+  _id?: ObjectId;
   @prop()
   createdAt: Date;
 

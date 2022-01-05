@@ -13,12 +13,26 @@ import { paginate } from '../../helpers/typegoose-pagination';
 export class MongoBaseRepository<Entity> implements BaseRepository<Entity> {
   private readonly model: ReturnModelType<AnyParamConstructor<any>, BeAnObject>;
 
-  constructor (private connection: Connection, private classModel: AnyParamConstructor<any>) {
-    this.model = getModelForClass(this.classModel, { existingConnection: this.connection });
+  constructor (
+		private readonly connection: Connection,
+		private readonly classModel: AnyParamConstructor<any>,
+		private readonly collectionName: string
+	) {
+    this.model = getModelForClass(
+			this.classModel,
+      {
+        existingConnection: this.connection,
+        schemaOptions: {
+          collection: collectionName
+        }
+      }
+		);
   }
 
   async create (entity: Entity): Promise<Entity> {
-    return (await this.model.create(entity))?._doc;
+    const entitySaved = await this.model.create(entity);
+
+    return entitySaved?._doc;
   }
 
   async delete (id: string): Promise<boolean> {
@@ -33,7 +47,9 @@ export class MongoBaseRepository<Entity> implements BaseRepository<Entity> {
   }
 
   async getById (id: string): Promise<Entity> {
-    return this.model.findById(id);
+    const entity = await this.model.findById(id);
+
+    return entity?._doc;
   }
 
   async update (id: string, entity: Entity): Promise<Entity> {

@@ -1,12 +1,12 @@
 export abstract class BaseEntity {
-  id: string;
+  _id: string;
   createdAt: Date;
   updatedAt: Date;
   deletedAt?: Date | null;
 }
 
 export type BaseEntityKeys =
-  | 'id'
+  | '_id'
   | 'createdAt'
   | 'updatedAt'
   | 'deletedAt';

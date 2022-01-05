@@ -2,19 +2,14 @@ import { StatusCodes } from 'http-status-codes';
 import { ApiResponse } from '../../../utils/dtos/api.response.dtos';
 
 class AwsApiResult {
-  private readonly statusCode: number;
-  private readonly code: number;
-  private readonly message: string;
-  private readonly body?: any;
+  constructor (
+		private readonly body?: any,
+		private readonly statusCode = StatusCodes.OK,
+		private readonly code?: number,
+		private readonly message?: string
+	) {}
 
-  constructor (body?: any, statusCode = StatusCodes.OK, code?: number, message?: string) {
-    this.statusCode = statusCode;
-    this.code = code;
-    this.message = message;
-    this.body = body;
-  }
-
-  toOkResponse (): ApiResponse {
+  toResponse (): ApiResponse {
     return {
       statusCode: this.statusCode,
       body: JSON.stringify(this.body, null, 4)
@@ -48,7 +43,7 @@ export class AwsApiResponseUtils {
   static send (data: any): ApiResponse {
     const body = (data instanceof ApiResponse) ? data.body : data;
 
-    return new AwsApiResult(body).toOkResponse();
+    return new AwsApiResult(body, data?.statusCode).toResponse();
   }
 
   static sendPdf (data: Buffer): ApiResponse {

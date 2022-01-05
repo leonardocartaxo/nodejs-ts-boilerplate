@@ -1,1 +1,0 @@
-{"version":3,"file":"aws.api.request.dtos.js","sourceRoot":"","sources":["../../../../../src/main/aws/utils/aws.api.request.dtos.ts"],"names":[],"mappings":";;;AAEO,MAAM,oBAAoB,GAAG,CAAC,QAAa,EAAc,EAAE;IAChE,OAAO,EAAE,GAAG,QAAQ,EAAE,MAAM,EAAE,QAAQ,CAAC,cAAc,EAAE,CAAC;AAC1D,CAAC,CAAC;AAFW,QAAA,oBAAoB,wBAE/B"}

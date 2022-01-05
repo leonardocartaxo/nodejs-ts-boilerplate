@@ -5,6 +5,7 @@ import {
   PaginationOptions
 } from '../../helpers/pagination';
 import { BaseRepository } from '../repositories/base-repository';
+import { MongoBaseRepository } from '../repositories/mongo-base-repository';
 
 export abstract class BaseService<Entity, Dto, CreateDto, UpdateDto> {
   private readonly DEFAULT_PAGINATION_OPTIONS = {
@@ -13,7 +14,8 @@ export abstract class BaseService<Entity, Dto, CreateDto, UpdateDto> {
   };
 
   protected constructor (
-    private baseRepository: BaseRepository<Entity>,
+    // private baseRepository: BaseRepository<Entity>,
+    private baseRepository: MongoBaseRepository<Entity>,
     private mapperEntityToDto: Function
   ) {}
 
@@ -41,7 +43,7 @@ export abstract class BaseService<Entity, Dto, CreateDto, UpdateDto> {
       itemsPerPage: paginationOptions.limit ?? PAGINATION_DEFAULT_LIMIT,
       totalPages: pagination.totalPages,
       totalItems: pagination.totalItems,
-      items: pagination.items.map(it => this.mapperEntityToDto(it))
+      items: pagination.items.map(it => this.mapperEntityToDto((it as unknown as any)?._doc))
     };
   }
 

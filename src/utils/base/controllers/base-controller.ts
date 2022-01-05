@@ -6,24 +6,25 @@ import {
 } from '../../helpers/pagination';
 import { handleControllerError } from '../../error.handlers';
 import { BaseService } from '../services/base-service';
+import { ApiResponse } from '../../dtos/api.response.dtos';
 
 export abstract class BaseController<Entity, Dto, CreateDto, UpdateDto> {
   protected constructor (private readonly baseService: BaseService<Entity, Dto, CreateDto, UpdateDto>) {
   }
 
-  public async create (createDto: CreateDto): Promise<Dto> {
+  public async create (createDto: CreateDto): Promise<Dto | ApiResponse> {
     try {
       return await this.baseService.create(createDto);
     } catch (error) {
-      handleControllerError(error);
+      return handleControllerError(error);
     }
   }
 
-  async get (id: string): Promise<Dto> {
+  async get (id: string): Promise<Dto | ApiResponse> {
     try {
       return await this.baseService.get(id);
     } catch (error) {
-      handleControllerError(error);
+      return handleControllerError(error);
     }
   }
 
