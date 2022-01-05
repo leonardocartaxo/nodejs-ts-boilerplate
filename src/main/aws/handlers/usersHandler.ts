@@ -12,7 +12,7 @@ let usersMicroservice!: UsersMicroservice;
 
 const init = async () => {
   if (!connection) {
-    connection = createConnection(Constants.getInstance().DB_MONGO_URI);
+    connection = await createConnection(Constants.getInstance().DB_MONGO_URI);
   }
   if (!usersMicroservice) {
     usersMicroservice = new UsersMicroservice(connection);

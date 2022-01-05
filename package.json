@@ -9,7 +9,7 @@
     "lint-fix": "tslint -p tsconfig.json -c tslint.json --fix",
     "start:local:serverless": "serverless offline",
     "deploy:serverless": "serverless deploy",
-    "test": "jest"
+    "test": "jest --config ./jest.config.js --detectOpenHandles"
   },
   "repository": {
     "type": "git",
