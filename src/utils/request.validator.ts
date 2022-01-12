@@ -1,7 +1,7 @@
 import { ClassType, transformAndValidate } from 'class-transformer-validator';
 import { ApiRequest } from './dtos/api.request.dtos';
 import { StatusCodes } from 'http-status-codes';
-import Constants from './constants';
+import AppConfig from './app-config';
 
 export class RequestValidator {
   static async getValidSchema<T extends object> (classType: ClassType<T>, body: any): Promise<any> {
@@ -11,7 +11,7 @@ export class RequestValidator {
   static async validate (schema: RequestValidatorSchema): Promise<any> {
     if (schema?.authenticate) {
       const token = schema?.req?.headers?.Authorization ?? '';
-      if (!token?.includes(Constants.getInstance().AUTHENTICATION_TOKEN)) {
+      if (!token?.includes(AppConfig.getInstance().AUTHENTICATION_TOKEN)) {
         throw {
           statusCode: StatusCodes.UNAUTHORIZED
         };

@@ -4,7 +4,7 @@ import * as usersHandler from '../../../src/main/aws/handlers/usersHandler';
 import { UserCreateDto, UserDto } from '../../../src/microservices/users/dtos/user.dto';
 import { Pagination } from '../../../src/utils/helpers/pagination';
 import { getMongoInMemoryUri, stopMongoInMemory } from '../../utils/mongo-in-memory-db-manager';
-import Constants from '../../../src/utils/constants';
+import AppConfig from '../../../src/utils/app-config';
 
 const dotenvPath = path.join(__dirname, '../../../', '.env');
 dotenv.config({
@@ -13,7 +13,7 @@ dotenv.config({
 
 describe('Test user AWS handler', () => {
   beforeEach(async () => {
-    Constants.getInstance().DB_MONGO_URI = await getMongoInMemoryUri();
+    AppConfig.getInstance().DB_MONGO_URI = await getMongoInMemoryUri();
   });
 
   afterEach(async () => {

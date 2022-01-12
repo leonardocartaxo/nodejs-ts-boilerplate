@@ -1,5 +1,5 @@
-export default class Constants {
-  private static current: Constants;
+export default class AppConfig {
+  private static current: AppConfig;
 
   // MISC ENVS
   NODE_ENV = process.env.NODE_ENV;
@@ -9,14 +9,14 @@ export default class Constants {
   DB_MONGO_URI = process.env.DB_MONGO_URI;
 
   static () {
-    Constants.current = new Constants();
+    AppConfig.current = new AppConfig();
   }
 
-  static getInstance (): Constants {
-    if (!Constants.current) {
-      Constants.current = new Constants();
+  static getInstance (): AppConfig {
+    if (!AppConfig.current) {
+      AppConfig.current = new AppConfig();
     }
 
-    return Constants.current;
+    return AppConfig.current;
   }
 }

@@ -4,7 +4,7 @@ import { Context } from 'aws-lambda';
 import { AwsApiResponseUtils } from '../utils/aws.api.response.utils';
 import { awsEventToApiRequest } from '../utils/aws.api.request.dtos';
 import UsersMicroservice from '../../../microservices/users';
-import Constants from '../../../utils/constants';
+import AppConfig from '../../../utils/app-config';
 import { ApiResponse } from '../../../utils/dtos/api.response.dtos';
 
 let connection!: Connection;
@@ -12,7 +12,7 @@ let usersMicroservice!: UsersMicroservice;
 
 const init = async () => {
   if (!connection) {
-    connection = await createConnection(Constants.getInstance().DB_MONGO_URI);
+    connection = await createConnection(AppConfig.getInstance().DB_MONGO_URI);
   }
   if (!usersMicroservice) {
     usersMicroservice = new UsersMicroservice(connection);
